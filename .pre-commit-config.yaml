@@ -13,3 +13,10 @@ repos:
     hooks:
       - id: gitleaks
 
+
+
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    # uv version.
+    rev: 0.9.9
+    hooks:
+      - id: uv-lock
