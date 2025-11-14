@@ -1,0 +1,9 @@
+[project]
+name = "atena"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi[standard]>=0.121.2",
+    "pre-commit>=4.4.0",
+]
