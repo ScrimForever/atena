@@ -1,35 +1,30 @@
 from fastapi import APIRouter, UploadFile, File
-
+from starlette.responses import JSONResponse
+from starlette.status import HTTP_409_CONFLICT
+from services.bucket import BucketService
+from services.validate import ValidateJSON
+from services.mergefiles import MergeFiles
+from services.generate_report import GenerateReport
+from loguru import logger
 
 exported_files_router = APIRouter(tags=["EXPORTED FILES"], prefix="/exported")
 
 
 @exported_files_router.post('/upload-files')
 async def upload_multiple_files(files: list[UploadFile] = File(...)):
+    bucket_persist_files = await BucketService().files_persist(files)
+    if bucket_persist_files:
+        _is_valid = await ValidateJSON().validate_input_jsons()
+        if _is_valid is True:
+            await MergeFiles().merge()
+            return await GenerateReport().generate()
 
-    """
-    upload_files_paths = []
-    for file in files:
-        file_path = os.path.join(BUCKET_FILES, file.filename)
-        try:
-            with open(file_path, "wb") as buffer:
-                while contents := await file.read(1024 * 1024):
-                    buffer.write(contents)
-            upload_files_paths.append(file_path)
-        except Exception as e:
-            return JSONResponse(
-                content={
-                    "message": f"There was an error: {file.filename} - Error: {e}"
-                },
-                status_code=HTTP_409_CONFLICT
-            )
-        finally:
-            await file.close()
-
-    return JSONResponse(
-        content={
-            "message": f"Successfully uploaded files"
-        },
-        status_code=HTTP_200_OK
-    )
-    """
+        else:
+            return _is_valid
+    else:
+        return JSONResponse(
+            content={
+                "message": "Some problem to upload files. Please, try again."
+            },
+            status_code=HTTP_409_CONFLICT
+        )

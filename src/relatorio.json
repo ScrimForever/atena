@@ -1,0 +1,57 @@
+{
+    "customers": {
+        "Ana": {
+            "ID": "101, 103",
+            "order_count": 2
+        },
+        "John": {
+            "ID": "102",
+            "order_count": 1
+        },
+        "Maria": {
+            "ID": "104, 105",
+            "order_count": 2
+        }
+    },
+    "country": {
+        "Brasil": 390.0,
+        "EUA": 60.0,
+        "total": 450.0
+    },
+    "Products": {
+        "Caneca": {
+            "quantity": 6,
+            "revenue": 150.0
+        },
+        "Camiseta": {
+            "quantity": 3,
+            "revenue": 180.0
+        },
+        "Bon\u00e9": {
+            "quantity": 3,
+            "revenue": 120.0
+        },
+        "best_seller": "Caneca"
+    },
+    "Spending": {
+        "Maria": {
+            "country": "Brasil",
+            "total_spent": 220.0,
+            "orders": 2
+        },
+        "Ana": {
+            "country": "Brasil",
+            "total_spent": 170.0,
+            "orders": 2
+        },
+        "John": {
+            "country": "EUA",
+            "total_spent": 60.0,
+            "orders": 1
+        },
+        "top_spending": {
+            "name": "Maria",
+            "R$": 220.0
+        }
+    }
+}
