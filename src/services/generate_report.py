@@ -129,7 +129,7 @@ class GenerateReport:
             "R$": top_customer_spent
         }
         mount_dict.update({"Spending": dict_spending})
-        with open("relatorio.json", "w") as f:
+        with open(os.path.join(settings.upload_files_bucket, "relatorio.json"), "w") as f:
             f.write(json.dumps(mount_dict, indent=4))
         return True
 
