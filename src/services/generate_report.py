@@ -131,7 +131,7 @@ class GenerateReport:
         mount_dict.update({"Spending": dict_spending})
         with open(os.path.join(settings.upload_files_bucket, "relatorio.json"), "w") as f:
             f.write(json.dumps(mount_dict, indent=4))
-        return True
+        return mount_dict
 
 
     async def generate(self):
@@ -141,4 +141,4 @@ class GenerateReport:
         customers = self._total_order_by_customer(merged)
         country = self._total_by_contry(merged, customers)
         quantity = self._total_by_quantity(merged, country)
-        self._total_by_spending(merged, quantity)
+        return self._total_by_spending(merged, quantity)
